@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://db:5432/taskforge
+    username: taskforge
+    password: taskforge
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+
+server:
+  port: 8080
+
+taskforge:
+  security:
+    jwtSecret: "change-this-in-prod"
+    jwtExpirationSeconds: 86400
+
+
