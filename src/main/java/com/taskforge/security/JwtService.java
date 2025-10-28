@@ -18,18 +18,25 @@ public class JwtService {
     private final long expirationSeconds;
 
     public JwtService(
-            @Value("${taskforge.security.jwtSecret}") String secret,
+            @Value("${taskforge.security.jwtSecret:auto}") String secret,
             @Value("${taskforge.security.jwtExpirationSeconds}") long expirationSeconds
     ) {
-        // Derive a 256-bit key from the provided secret using SHA-256 to satisfy HS256 requirements
-        byte[] keyBytes;
-        try {
-            java.security.MessageDigest digest = java.security.MessageDigest.getInstance("SHA-256");
-            keyBytes = digest.digest(secret.getBytes(java.nio.charset.StandardCharsets.UTF_8));
-        } catch (java.security.NoSuchAlgorithmException e) {
-            throw new IllegalStateException("SHA-256 not available", e);
+        Key useKey;
+        if (secret == null || secret.isBlank() || "auto".equalsIgnoreCase(secret)) {
+            // Generate a secure random key for HS256
+            useKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+        } else {
+            // Derive a 256-bit key from the provided secret using SHA-256 to satisfy HS256 requirements
+            byte[] keyBytes;
+            try {
+                java.security.MessageDigest digest = java.security.MessageDigest.getInstance("SHA-256");
+                keyBytes = digest.digest(secret.getBytes(java.nio.charset.StandardCharsets.UTF_8));
+            } catch (java.security.NoSuchAlgorithmException e) {
+                throw new IllegalStateException("SHA-256 not available", e);
+            }
+            useKey = Keys.hmacShaKeyFor(keyBytes);
         }
-        this.key = Keys.hmacShaKeyFor(keyBytes);
+        this.key = useKey;
         this.expirationSeconds = expirationSeconds;
     }
 
