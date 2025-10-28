@@ -1,0 +1,10 @@
+taskforge:
+  security:
+    # 64+ chars to ensure >= 256-bit when hashed or used directly
+    jwtSecret: "this-is-a-very-strong-secret-for-tests-1234567890-abcdefghijklmnopqrstuvwxyz-TESTS"
+    jwtExpirationSeconds: 3600
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+
