@@ -1,5 +1,9 @@
 # TaskForge - JWT-secured Tasks API
 
+[![CI](https://github.com/Ampfa15/task_forge/actions/workflows/ci.yml/badge.svg)](https://github.com/Ampfa15/task_forge/actions/workflows/ci.yml)
+
+A focused Spring Boot 3 backend showcasing real-world auth and user-scoped CRUD with clean architecture and Dockerized deployment.
+
 A production-ready Spring Boot 3 Java 17 API demonstrating:
 - JWT auth (register/login)
 - Tasks CRUD scoped to the authenticated user
