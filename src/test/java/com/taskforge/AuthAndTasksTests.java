@@ -11,6 +11,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
+@org.springframework.test.context.TestPropertySource(properties = {
+        "taskforge.security.jwtSecret=super-strong-secret-for-tests-ABCDEFGHIJKLMNOPQRSTUVWXYZ-1234567890",
+        "taskforge.security.jwtExpirationSeconds=3600"
+})
 @AutoConfigureMockMvc
 class AuthAndTasksTests {
     @Autowired
