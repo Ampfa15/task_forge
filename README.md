@@ -69,5 +69,8 @@ To override JWT secret in prod: set env `TASKFORGE_SECURITY_JWTSECRET` or mount 
 - H2 (dev), Postgres (prod)
 - Java 17
 
+## Roadmap
+See [ROADMAP.md](./ROADMAP.md).
+
 ## License
 MIT
